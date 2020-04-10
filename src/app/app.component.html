@@ -1,2 +1,2 @@
 <h1>hello {{msg}} ! </h1>
-<app-user [users]="users"></app-user>
+<app-user *ngFor="let u of users" [user]="u"></app-user>
