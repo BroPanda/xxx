@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {UserModel} from '.././models/UserModel';
 
 @Component({
   selector: 'app-root',
@@ -7,11 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() {
-    this.greeting();
-  }
+  msg = 'users';
+  users: UserModel[];
 
-  greeting() {
-    console.log('hello');
+  constructor(private httpQ: HttpClient) {
+    this.httpQ.get<UserModel[]>(`https://jsonplaceholder.typicode.com/users`).subscribe(value => {
+      console.log(value);
+      this.users = value;
+    });
   }
 }
